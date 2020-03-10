@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 添加新字母 -->
+        <div>
+            <input v-model="newName" type="text">
+            <button type="button" @click="addNew">添加</button>
+        </div>
+        <ul>
+            <li v-for="item in list" :key="item.id">   <!-- 不加key，数据状态就会紊乱 -->
+                <input type="checkbox">
+                序号是{{item.id+1}}，字母是{{item.name}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                newName:'',
+                list: [{
+                        id: 0,
+                        name: 'A'
+                    },
+                    {
+                        id: 1,
+                        name: 'B'
+                    },
+                    {
+                        id: 2,
+                        name: 'C'
+                    },
+                    {
+                        id: 3,
+                        name: 'D'
+                    },
+                    {
+                        id: 4,
+                        name: 'E'
+                    },
+                    {
+                        id: 5,
+                        name: 'F'
+                    },
+                ]
+            },
+            methods:{
+                addNew(){
+                    let newZM = { id: this.list.length, name: this.newName};
+                    this.list.unshift(newZM)
+                    this.newName = ""
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
